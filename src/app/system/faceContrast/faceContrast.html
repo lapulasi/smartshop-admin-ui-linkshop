@@ -1,0 +1,39 @@
+<div class="row" [ngClass]="{'hidden': isUrl}">
+  <div class="col-sm-6 pull-left" >
+    <image-upload [class]="'customClass'" [buttonCaption]="'选择图片1'" [clearButtonCaption]="'删除'"
+                  url="{{imagePath}}/recog/faceImage"
+                  (uploadFinished)="onUploadFinished1($event)"></image-upload>
+  </div>
+  <div class="col-sm-6 pull-right">
+    <image-upload [class]="'customClass'" [buttonCaption]="'选择图片2'" [clearButtonCaption]="'删除'"
+                  url="{{imagePath}}/recog/faceImage"
+                  (uploadFinished)="onUploadFinished2($event)"></image-upload>
+  </div>
+</div>
+<div class="row" [ngClass]="{'hidden': !isUrl}">
+  <div class="col-sm-6">
+    <img src="{{urlPath1}}" alt="">
+  </div>
+  <div class="col-sm-6" >
+    <img src="{{urlPath2}}" alt="">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <input class="input" type="text" placeholder="请输入图片的URL" [(ngModel)]="urlPath1" (blur)="uploadImg1()">
+  </div>
+  <div class="col-sm-6">
+    <input class="input" type="text" placeholder="请输入图片的URL" [(ngModel)]="urlPath2" (blur)="uploadImg2()">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1">
+    <button class="btn btn-primary" (click)="detect()">检测</button>
+  </div>
+</div>
+<div class="row result">
+  <p class="col-sm-2">检查结果</p>
+  <p class="col-sm-2">相似度：<span>{{result}}</span></p>
+</div>
+

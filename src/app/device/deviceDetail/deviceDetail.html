@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-sm-1 ">
+    <label class="query_label">UID：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="deviceUid">
+  </div>
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="searchDevice()">查询</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">UID</th>
+        <th class="text-center">type</th>
+        <th class="text-center">店铺</th>
+        <th class="text-center">商圈</th>
+        <th class="text-center">公司</th>
+        <th class="text-center">状态</th>
+        <th class="text-center">异常 / 消息数</th>
+      </tr>
+      </thead>
+      <tbody>
+     <tr *ngFor="let info of deviceList">
+       <td><a href="javascript:;" [routerLink]="['/device/deviceMsg']" [queryParams]="{'uid': info?.deviceUID}">{{info?.deviceUID}}</a></td>
+       <td>{{info.deviceType}}</td>
+       <td>{{info.shopName}}</td>
+       <td>{{info.groupName}}</td>
+       <td>{{info.companyName}}</td>
+       <td [ngClass]="{'red': info?.status != '1'}">{{info.status == '1' ? '正常' : '异常'}}</td>
+       <td>{{info.errMsgNum}} / {{info.msgNum}}</td>
+     </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

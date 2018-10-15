@@ -1,0 +1,52 @@
+/**
+  自动义nouislider样式
+ */
+.noUi-connect{
+  background: #83AFFF!important;
+}
+.noUi-horizontal{
+  height: 5.75px!important;
+  border-width: 0px!important;
+}
+.noUi-horizontal .noUi-handle{
+  width: 20px!important;
+  height: 20px!important;
+  border-radius: 50%!important;
+  box-sizing: border-box!important;
+  border: 6px solid #4280F2!important;
+  background: #fff!important;
+  box-shadow: 0 2px 4px 0 rgba(66, 128, 242, 0.5)!important;
+}
+.noUi-handle:before,
+.noUi-handle:after{
+  width: 0px!important;
+}
+.noUi-tooltip{
+  font-size: 12px;
+}
+
+.progress_custom {
+  width: 100%;
+  padding: 0 3.7%;
+  background: #fff; }
+.progress_custom p {
+  display: block;
+  font-size: 14px;
+  line-height: 14px;
+  color: #5C626D;
+  padding-top: 0.4rem; }
+.progress_custom .progress-bar {
+  width: 100%;
+  height: 0.4rem;
+  position: relative;
+  margin-top: 0.2rem; }
+
+.map-one {
+  width: 100%;
+  background: #fff;
+  padding-bottom: 0.4rem; }
+ .map-one img{
+  width: 100%;
+  /*height: 3.6rem;*/
+  margin: 0 3.7%; }
+

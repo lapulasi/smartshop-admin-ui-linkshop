@@ -1,0 +1,91 @@
+<div class="row">
+  <app-company-list class="col-sm-3" [organizationName]="organizationName" [orgShow]="true" (change)="getCompanyInfo($event, staticModal)"></app-company-list>
+  <!--<div class="col-sm-1 query_label">
+    <label class="">公司：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [ngModel]="company" (ngModelChange)="onBrandChange($event, staticModal)">
+      <option value=""></option>
+      <option *ngFor="let i of companyList" [value]="i.id">{{i.name}}</option>
+    </select>
+  </div>-->
+
+</div>
+
+<div class="row">
+  <div class="col-sm-1 query_label">
+    <label class="">最小到店次数：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="minAccessCount">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="query()">搜索</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">店铺ID</th>
+        <th class="text-center">顾客ID</th>
+        <th class="text-center">顾客头像</th>
+        <th class="text-center">性别</th>
+        <th class="text-center">年龄</th>
+        <th class="text-center">进店时间</th>
+        <th class="text-center">到店次数</th>
+        <th class="text-center">相似度</th>
+        <th class="text-center">是否被排除</th>
+        <th class="text-center">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of guestList; index as currIndex">
+        <td>{{i.shopId}}</td>
+        <td>{{i.guestId}}</td>
+        <td class="headImg" width="10%">
+          <a *ngIf="i.headImg!=null" href="{{imgPrefix}}{{i.headImg}}">
+            <img src="{{imgPrefix + i.headImg}}" class="img-avatar" width="40" height="40"/>
+          </a>
+        </td>
+        <td>{{i.gender == 'F' ? '女' : '男'}}</td>
+        <td>{{i.age}}</td>
+        <td>{{i.lastAccessTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+        <td><a href="javascript:;" (click)="checkRecord(currIndex)">{{i.accessCount}}</a></td>
+        <td>{{(i.avgSimilarity | percent:'1.2-2' )}}</td>
+        <td>{{i.exclude? '是': '否'  }}</td>
+        <td><a href="javascript:;" (click)="operate(currIndex)">{{i.exclude?'':'添加到排除列表'}}</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-left: 20px;">
+    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="9" (pageChanged)="pageChanged($event)"
+                [itemsPerPage]="pageSize"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{organizationName}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-company-tree [company]="companyId" [staticModal]="staticModal"
+                          (change)="getOrgInfo($event)"></app-company-tree>
+      </div>
+    </div>
+  </div>
+</div>

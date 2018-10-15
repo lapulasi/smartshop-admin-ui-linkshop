@@ -1,0 +1,36 @@
+<div class="tree well">
+  <ul>
+    <li [ngClass]="{'parent_li': treeData?.children!==null}">
+      <span *ngIf="treeData"><i class="fa fa-folder-open-o"></i> {{treeData?.name}} <a href="javascript:;" (click)="choose(treeData)" *ngIf="!onlySelectShop"> 选择</a></span>
+      <ul>
+        <li *ngFor="let i of treeData?.children; index as leave_5_index " [ngClass]="{'parent_li': i.children!==null}">
+          <span *ngIf="i.isShop"><i class="fa fa-leaf"></i> {{i.name}} <a href="javascript:;" (click)="choose(i)"> 选择</a></span>
+          <span *ngIf="!i.isShop"><i class="fa fa-folder-o"></i> {{i.name}} <a href="javascript:;" (click)="choose(i)" *ngIf="!onlySelectShop"> 选择</a></span>
+          <ul>
+            <li style="display: none" *ngFor="let j of i.children; index as leave_4_index" [ngClass]="{'parent_li': j.children!==null}">
+              <span *ngIf="j.isShop"><i class="fa fa-leaf"></i> {{j.name}}<a href="javascript:;" (click)="choose(j)"> 选择</a></span>
+              <span *ngIf="!j.isShop"><i class="fa fa-folder-open-o"></i> {{j.name}} <a href="javascript:;" (click)="choose(j)" *ngIf="!onlySelectShop"> 选择</a></span>
+              <ul>
+                <li *ngFor="let k of j.children; index as leave_3_index" [ngClass]="{'parent_li': k.children!==null}">
+                  <span *ngIf="k.isShop"><i class="fa fa-leaf"></i> {{k.name}} <a href="javascript:;" (click)="choose(k)"> 选择</a></span>
+                  <span *ngIf="!k.isShop"><i class="fa fa-folder-open-o"></i> {{k.name}} <a href="javascript:;" (click)="choose(k)" *ngIf="!onlySelectShop"> 选择</a></span>
+                  <ul>
+                    <li *ngFor="let m of k.children; index as leave_2_index" [ngClass]="{'parent_li': m.children!==null}">
+                      <span *ngIf="m.isShop"><i class="fa fa-leaf"></i> {{m.name}} <a href="javascript:;" (click)="choose(m)"> 选择</a></span>
+                      <!--<ul>
+                        <li *ngFor="let n of m.children">
+                          <span><i class=""></i> {{n.name}} <a routerLinkActive="active" [routerLink]="[modifyShopUrl]" [queryParams]="{'name': n.name,'parentOrgId':n._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a href="javascript:;" class="fa fa-trash-o fa-lg"  (click)="deleteOrg($event, n._id, n.children)"></a></span>
+                        </li>
+                      </ul>-->
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+</div>

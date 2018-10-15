@@ -1,0 +1,79 @@
+<app-userlog-common [isPageView]="true" (changeEvent)="handler($event)"></app-userlog-common>
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">用户Id</th>
+        <th class="text-center">名称</th>
+        <th class="text-center">链接</th>
+        <th class="text-center">时间</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of pageInfo">
+        <td><a href="javascript:;" (click)="getUserInfo(staticModal,i.userId)">{{i.userId}}</a></td>
+        <td>{{i.pageName}}</td>
+        <td>{{i.url}}</td>
+        <td>{{i.time | date: 'yyyy-MM-dd HH:ss:mm'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div style="margin-left: 20px;">
+  <pagination [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="9" (pageChanged)="pageChanged($event)"
+              [itemsPerPage]="pageSize"
+              previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{companyName}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-block">
+            <table class="table table-responsive table-hover table-outline mb-0 text-center">
+              <thead class="thead-default">
+              <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">姓名</th>
+                <th class="text-center">头像</th>
+                <th class="text-center">电话</th>
+                <th class="text-center">店铺</th>
+                <th class="text-center">商圈</th>
+                <th class="text-center">公司</th>
+                <th class="text-center">状态</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let i of userInfo">
+                <td>{{i.id}}</td>
+                <td>{{i.realName}}</td>
+                <td>
+                  <a *ngIf="i.headImg!=null" href="{{imgPrefix}}{{i.headImg}}">
+                    <img src="{{imgPrefix + i.headImg}}" class="img-avatar" width="40" height="40"/>
+                  </a>
+                </td>
+                <td>{{i.phone}}</td>
+                <td>{{i.belongOrg.orgLevel.shop ? i.belongOrg.name : ''}}</td>
+                <td>{{i.belongOrg.name}}</td>
+                <td>{{i.belongOrg.company.name}}</td>
+                <td>{{i.status}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

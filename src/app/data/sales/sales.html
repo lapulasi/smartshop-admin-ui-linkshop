@@ -1,0 +1,45 @@
+<app-data-common (change)="getInfo($event)" [timeShow]='false' [page]="'sales'"></app-data-common>
+
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">组织</th>
+        <th class="text-center">销量</th>
+        <th class="text-center">销售额</th>
+        <th class="text-center">均价</th>
+        <th class="text-center">客均价</th>
+        <th class="text-center">时效</th>
+        <th class="text-center">转化率</th>
+        <th class="text-center">门店面积</th>
+        <th class="text-center">坪效</th>
+        <th class="text-center">人效</th>
+        <th class="text-center">服务能力</th>
+        <th class="text-center">集客能力</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of salesData">
+        <td>{{i.name}}</td>
+        <td>{{i.data.allVolume}}</td>
+        <td>{{i.data.allAmount}}</td>
+        <td>{{i.data.allVolume===0 ? 0 : (i.data.allAmount / i.data.allVolume | number: '1.0-1')}}</td>
+        <td>{{i.data.guestCount===0 ? 0 : (i.data.allAmount / i.data.guestCount | number: '1.0-1')}}</td>
+        <td>{{i.data.allWorkHours===0 ? 0 : (i.data.allVolume / i.data.allWorkHours | number: '1.0-1')}}</td>
+        <td>{{i.data.guestCount===0 ? 0 : (i.data.allVolume / i.data.guestCount | number: '1.0-1')}}</td>
+        <td>{{i.data.allShopArea}}</td>
+        <td>{{i.data.allShopArea===0 ? 0 : (i.data.allAmount / i.data.allShopArea | number: '1.0-1')}}</td>
+        <td>{{i.data.allStaffNum===0 ? 0 : (i.data.allAmount / i.data.allStaffNum | number: '1.0-1')}}</td>
+        <td>{{i.data.allStaffNum===0 ? 0 : (i.data.guestCount / i.data.allStaffNum | number: '1.0-1')}}</td>
+        <td>{{i.data.allShopArea===0 ? 0 : (i.data.guestCount / i.data.allShopArea | number: '1.0-1')}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--<div style="margin-left: 20px;">-->
+  <!--<pagination [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="9" (pageChanged)="pageChanged($event)"-->
+  <!--[itemsPerPage]="pageSize"-->
+  <!--previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>-->
+  <!--</div>-->
+</div>

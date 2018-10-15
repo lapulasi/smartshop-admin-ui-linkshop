@@ -1,0 +1,107 @@
+<app-data-common (change)="getInfo($event)" [timeShow]="true" [page]="'countPage'"></app-data-common>
+
+
+<div class="card">
+  <div class="card-block" style="overflow: scroll">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">orgName</th>
+        <th class="text-center">total</th>
+        <th class="text-center">M</th>
+        <th class="text-center">M(%)</th>
+        <th class="text-center">F</th>
+        <th class="text-center">F(%)</th>
+        <th class="text-center">0-20</th>
+        <th class="text-center">0-20(%)</th>
+        <th class="text-center">20-30</th>
+        <th class="text-center">20-30(%)</th>
+        <th class="text-center">30-40</th>
+        <th class="text-center">30-40(%)</th>
+        <th class="text-center">40-50</th>
+        <th class="text-center">40-50(%)</th>
+        <th class="text-center">50-60</th>
+        <th class="text-center">50-60(%)</th>
+        <th class="text-center">60+</th>
+        <th class="text-center">60+(%)</th>
+        <th class="text-center">M(0-20)</th>
+        <th class="text-center">M(0-20(%))</th>
+        <th class="text-center">M(20-30)</th>
+        <th class="text-center">M(20-30(%))</th>
+        <th class="text-center">M(30-40)</th>
+        <th class="text-center">M(30-40(%))</th>
+        <th class="text-center">M(40-50)</th>
+        <th class="text-center">M(40-50(%))</th>
+        <th class="text-center">M(50-60)</th>
+        <th class="text-center">M(50-60(%))</th>
+        <th class="text-center">M(60+)</th>
+        <th class="text-center">M(60+(%))</th>
+        <th class="text-center">F(0-20)</th>
+        <th class="text-center">F(0-20(%))</th>
+        <th class="text-center">F(20-30)</th>
+        <th class="text-center">F(20-30(%))</th>
+        <th class="text-center">F(30-40)</th>
+        <th class="text-center">F(30-40(%))</th>
+        <th class="text-center">F(40-50)</th>
+        <th class="text-center">F(40-50(%))</th>
+        <th class="text-center">F(50-60)</th>
+        <th class="text-center">F(50-60(%))</th>
+        <th class="text-center">F(60+)</th>
+        <th class="text-center">F(60+(%))</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of flowData">
+        <td>{{i.name}}</td>
+        <td>{{i.allCount}}</td>
+        <td>{{i.M===undefined ? 0 : i.M}}</td>
+        <td>{{(i.allCount===0 || i.M===undefined) ? 0: i.M / i.allCount | percent:'1.2-2'}}</td>
+        <td>{{i.F===undefined ? 0 : i.F}}</td>
+        <td>{{(i.allCount===0 || i.F===undefined) ? 0: i.F / i.allCount | percent:'1.2-2'}}</td>
+        <td>{{i['0-20']===undefined ? 0 : i['0-20']}}</td>
+        <td>{{(i.allCount===0 || i['0-20']===undefined) ? 0: i['0-20'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['20-30']===undefined ? 0 : i['20-30']}}</td>
+        <td>{{(i.allCount===0 || i['20-30']===undefined) ? 0: i['20-30'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['30-40']===undefined ? 0 : i['30-40']}}</td>
+        <td>{{(i.allCount===0 || i['30-40']===undefined) ? 0: i['30-40'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['40-50']===undefined ? 0 : i['40-50']}}</td>
+        <td>{{(i.allCount===0 || i['40-50']===undefined) ? 0: i['40-50'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['50-60']===undefined ? 0 : i['50-60']}}</td>
+        <td>{{(i.allCount===0 || i['50-60']===undefined) ? 0: i['50-60'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['60-100']===undefined ? 0 : i['60-100']}}</td>
+        <td>{{(i.allCount===0 || i['60-100']===undefined) ? 0: i['60-100'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['M(0-20)']===undefined ? 0 : i['M(0-20)']}}</td>
+        <td>{{(i.allCount===0 || i['M(0-20)']===undefined) ? 0: i['M(0-20)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['M(20-30)']===undefined ? 0 : i['M(20-30)']}}</td>
+        <td>{{(i.allCount===0 || i['M(20-30)']===undefined) ? 0: i['M(20-30)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['M(30-40)']===undefined ? 0 : i['M(30-40)']}}</td>
+        <td>{{(i.allCount===0 || i['M(30-40)']===undefined) ? 0: i['M(30-40)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['M(40-50)']===undefined ? 0 : i['M(40-50)']}}</td>
+        <td>{{(i.allCount===0 || i['M(40-50)']===undefined) ? 0: i['M(40-50)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['M(50-60)']===undefined ? 0 : i['M(50-60)']}}</td>
+        <td>{{(i.allCount===0 || i['M(50-60)']===undefined) ? 0: i['M(50-60)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['M(60-100)']===undefined ? 0 : i['M(60-100)']}}</td>
+        <td>{{(i.allCount===0 || i['M(60-100)']===undefined) ? 0: i['M(60-100)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['F(0-20)']===undefined ? 0 : i['F(0-20)']}}</td>
+        <td>{{(i.allCount===0 || i['F(0-20)']===undefined) ? 0: i['F(0-20)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['F(20-30)']===undefined ? 0 : i['F(20-30)']}}</td>
+        <td>{{(i.allCount===0 || i['F(20-30)']===undefined) ? 0: i['F(20-30)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['F(30-40)']===undefined ? 0 : i['F(30-40)']}}</td>
+        <td>{{(i.allCount===0 || i['F(30-40)']===undefined) ? 0: i['F(30-40)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['F(40-50)']===undefined ? 0 : i['F(40-50)']}}</td>
+        <td>{{(i.allCount===0 || i['F(40-50)']===undefined) ? 0: i['F(40-50)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['F(50-60)']===undefined ? 0 : i['F(50-60)']}}</td>
+        <td>{{(i.allCount===0 || i['F(50-60)']===undefined) ? 0: i['F(50-60)'] / i.allCount| percent:'1.2-2'}}</td>
+        <td>{{i['F(60-100)']===undefined ? 0 : i['F(60-100)']}}</td>
+        <td>{{(i.allCount===0 || i['F(60-100)']===undefined) ? 0: i['F(60-100)'] / i.allCount| percent:'1.2-2'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--<div style="margin-left: 20px;">-->
+  <!--<pagination [boundaryLinks]="true" [(i.F + i.M)Items]="(i.F + i.M)Items" [maxSize]="9" (pageChanged)="pageChanged($event)"-->
+  <!--[itemsPerPage]="pageSize"-->
+  <!--previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>-->
+  <!--</div>-->
+</div>
+

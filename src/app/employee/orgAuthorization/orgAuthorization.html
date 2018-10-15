@@ -1,0 +1,81 @@
+
+<div class="tree well">
+  <div class="row">
+    <div class="col-sm-10"></div>
+    <button type="button"  class="col-sm-offset-10 col-sm-1 btn btn-primary" (click)="orgAuthorzation()">授权</button>
+  </div>
+  <ul>
+    <li [ngClass]="{'parent_li': treeData?.children!==null}">
+        <a class="checkbox" *ngIf="treeData" (change)="selectOrg(treeData?._id)">
+          <label>
+            <input type="checkbox" [checked]="orgIds.includes(treeData?._id)">
+          </label>
+        </a>
+        <span *ngIf="treeData"><i class="fa fa-folder-open-o"></i> {{treeData?.name}}</span>
+      <ul>
+        <li style="display: none" *ngFor="let i of treeData?.children; index as leave_5_index " [ngClass]="{'parent_li': i.children!==null}">
+          <a class="checkbox" *ngIf="i.isShop" (change)="selectOrg(i._id)">
+            <label>
+              <input type="checkbox" [checked]="orgIds.includes(i._id)">
+            </label>
+          </a>
+          <span *ngIf="i.isShop"><i class="fa fa-leaf"></i> {{i.name}}</span>
+          <a class="checkbox" *ngIf="!i.isShop" (change)="selectOrg(i._id)">
+            <label>
+              <input type="checkbox" [checked]="orgIds.includes(i._id)">
+            </label>
+          </a>
+          <span *ngIf="!i.isShop"><i class="fa fa-folder-o"></i> {{i.name}}</span>
+          <ul>
+            <li *ngFor="let j of i.children; index as leave_4_index" [ngClass]="{'parent_li': j.children!==null}">
+              <a class="checkbox" *ngIf="j.isShop" (change)="selectOrg(j._id)">
+                <label>
+                  <input type="checkbox" [checked]="orgIds.includes(j._id)">
+                </label>
+              </a>
+              <span *ngIf="j.isShop"><i class="fa fa-leaf"></i> {{j.name}}</span>
+              <a class="checkbox" *ngIf="!j.isShop" (change)="selectOrg(j._id)">
+                <label>
+                  <input type="checkbox" [checked]="orgIds.includes(j._id)">
+                </label>
+              </a>
+              <span *ngIf="!j.isShop"><i class="fa fa-folder-o"></i> {{j.name}} </span>
+              <ul>
+                <li *ngFor="let k of j.children; index as leave_3_index" [ngClass]="{'parent_li': k.children!==null}">
+                  <a class="checkbox" *ngIf="k.isShop" (change)="selectOrg(k._id)">
+                    <label>
+                      <input type="checkbox" [checked]="orgIds.includes(k._id)">
+                    </label>
+                  </a>
+                  <span *ngIf="k.isShop"><i class="fa fa-leaf"></i> {{k.name}}</span>
+                  <a class="checkbox" *ngIf="!k.isShop" (change)="selectOrg(k._id)">
+                    <label>
+                      <input type="checkbox" [checked]="orgIds.includes(k._id)">
+                    </label>
+                  </a>
+                  <span *ngIf="!k.isShop"><i class="fa fa-folder-o"></i> {{k.name}}</span>
+                  <ul>
+                    <li *ngFor="let m of k.children; index as leave_2_index" [ngClass]="{'parent_li': m.children!==null}">
+                      <a class="checkbox" *ngIf="m.isShop" (change)="selectOrg(m._id)">
+                        <label>
+                          <input type="checkbox" [checked]="orgIds.includes(m._id)">
+                        </label>
+                      </a>
+                      <span *ngIf="m.isShop"><i class="fa fa-folder-o"></i> {{m.name}}</span>
+                      <!--<ul>
+                        <li *ngFor="let n of m.children">
+                          <span><i class=""></i> {{n.name}} <a routerLinkActive="active" [routerLink]="[modifyShopUrl]" [queryParams]="{'name': n.name,'parentOrgId':n._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a href="javascript:;" class="fa fa-trash-o fa-lg"  (click)="deleteOrg($event, n._id, n.children)"></a></span>
+                        </li>
+                      </ul>-->
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+</div>

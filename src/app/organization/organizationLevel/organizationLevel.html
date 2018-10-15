@@ -1,0 +1,42 @@
+<div class="row">
+  <app-company-list class="col-sm-3" (change)="getCompanyInfo($event)"></app-company-list>
+  <div class="col-sm-2">
+    <button class="btn btn-primary" type="button" (click)="addLevel()">新增</button>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-block">
+    <table style="table-layout: fixed" class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">层级</th>
+        <th class="text-center">名称</th>
+        <th class="text-center">最小缩放级别</th>
+        <th class="text-center">最大缩放级别</th>
+        <th class="text-center">是否店铺</th>
+        <th class="text-center">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of levelList">
+        <td>{{i.level}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.minZoom}}</td>
+        <td>{{i.maxZoom}}</td>
+        <td>{{i.shop?'是': '否'}}</td>
+        <td>
+          <a href="javascript:;" (click)="editeLevel(i.id)">编辑</a>
+          <a href="javascript:;" (click)="deleteLevel(i.id)">删除</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div style="margin-left: 20px;">
+    <pagination [totalItems]="totalItems" (pageChanged)="pageChanged($event)" [itemsPerPage]="pageSize"
+                previousText="&laquo;" nextText="&raquo;"></pagination>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-sm-6 col-lg-3">
+    <div class="card text-white bg-primary">
+      <div class="card-body pb-0">
+        <!--<div class="btn-group float-right">
+          <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icon-settings"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>-->
+        <div class="text-value">设备数 ({{abnormalNum[6]}}/{{deviceNum[6]}})</div>
+        <!--<div>Members online</div>-->
+      </div>
+      <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+        <canvas id="card-chart1" class="chart" height="70"></canvas>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+  <div class="col-sm-6 col-lg-3">
+    <div class="card text-white bg-info">
+      <div class="card-body pb-0">
+        <!--<button type="button" class="btn btn-transparent p-0 float-right">
+          <i class="icon-location-pin"></i>
+        </button>-->
+        <div class="text-value">人脸消息数 ({{faceIllegalMsgCount[6]}}/{{faceMsgCount[6]}})</div>
+        <!--<div>Members online</div>-->
+      </div>
+      <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+        <canvas id="card-chart2" class="chart" height="70"></canvas>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+  <div class="col-sm-6 col-lg-3">
+    <div class="card text-white bg-warning">
+      <div class="card-body pb-0">
+        <!--<div class="btn-group float-right">
+          <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icon-settings"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>-->
+        <div class="text-value">全景消息数 ({{viewIllegalMsgCount[6]}}/{{viewMsgCount[6]}})</div>
+        <!--<div>Members online</div>-->
+      </div>
+      <div class="chart-wrapper mt-3" style="height:70px;">
+        <canvas id="card-chart3" class="chart" height="70"></canvas>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+  <div class="col-sm-6 col-lg-3">
+    <div class="card text-white bg-danger">
+      <div class="card-body pb-0">
+        <!--<div class="btn-group float-right">
+          <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icon-settings"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>-->
+        <div class="text-value">销量 ({{salesData[6]}})</div>
+        <!--<div>Members online</div>-->
+      </div>
+      <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+        <canvas id="card-chart4" class="chart" height="70"></canvas>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">组织</th>
+        <th class="text-center">公司</th>
+        <th class="text-center">设备数</th>
+        <th class="text-center">异常设备数</th>
+        <th class="text-center">设备正常率</th>
+        <th class="text-center">客流总数</th>
+        <th class="text-center">环比</th>
+        <th class="text-center">店均客流</th>
+        <th class="text-center">单店最大值</th>
+        <th class="text-center">平均驻留</th>
+        <th class="text-center">平均年龄</th>
+        <th class="text-center">男性占比</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of deviceList">
+        <td>{{i.name}}</td>
+        <td>{{i.companyName}}</td>
+        <td>{{i.abnormalNum + i.normalNum}}</td>
+        <td>{{i.abnormalNum}}</td>
+        <td [ngClass]="{'red': i.normalNum / (i.abnormalNum + i.normalNum ) < 0.5 || (i.abnormalNum == null || i.normalNum == 0 || i.normalNum == null)}">{{(i.abnormalNum == null || i.normalNum == 0 || i.normalNum == null) ? '0%' : i.normalNum / (i.abnormalNum + i.normalNum ) | percent:'1.0-0'}}</td>
+        <td>{{i.guestCount}}</td>
+        <td>{{(i.yesterDayGuestCount == 0 || i.yesterDayGuestCount == null) ? '0%' : (i.guestCount - i.yesterDayGuestCount) / i.yesterDayGuestCount | percent:'1.0-0'}}</td>
+        <td>{{(i.shopNum == 0 || i.shopNum == null) ? 0 : i.guestCount / i.shopNum | number: '1.0-2' }}</td>
+        <td>{{i.maxGuestCount}}</td>
+        <td>{{(i.guestCount == 0 || i.guestCount == null) ? 0 : i.stayMins / i.guestCount | number: '1.0-2'}}</td>
+        <td>{{i.avgAge == null ? 0 : i.avgAge | number: '1.0-2'}}</td>
+        <td>{{(i.countM == 0 || i.countF == null || i.countM == null) ? '0%' : i.countM / (i.countF + i.countM) | percent:'1.0-0'}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <!--<div style="margin-left: 20px;">
+    <pagination [totalItems]="totalItems" (pageChanged)="pageChanged($event)" [itemsPerPage]="pageSize"
+                previousText="&laquo;" nextText="&raquo;"></pagination>
+  </div>-->
+</div>

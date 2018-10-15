@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-6" [ngClass]="{'hidden': isUrl}" >
+      <image-upload [class]="'customClass'"
+                    url="{{imagePath}}/recog/faceImage"
+                    [buttonCaption]="'选择图片'" [clearButtonCaption]="'删除'"
+                    (uploadFinished)="onUploadFinished($event)"></image-upload>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6"  [ngClass]="{'hidden': !isUrl}">
+    <img src="{{urlPath}}" alt="">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <input class="input" type="text" placeholder="请输入图片的URL" [(ngModel)]="urlPath" (blur)="uploadImg()">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <button class="btn btn-primary" (click)="detect()">检测</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2 result">
+    <p>检测结果:</p>
+    <ul>
+      <li>性别：<span>{{gender}}</span></li>
+      <li>年龄：<span>{{age}}</span></li>
+      <li>情绪：<span>{{mood}}</span></li>
+    </ul>
+  </div>
+</div>

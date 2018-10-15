@@ -1,0 +1,113 @@
+<div class="row">
+  <app-company-list class="col-sm-3" [organizationName]="organizationName" [orgShow]="true" (change)="getCompanyInfo($event, staticModal)"></app-company-list>
+
+</div>
+<div class="row">
+  <div class="col-sm-1 query_label">
+    <label class="">设备类型：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="deviceTypeModel" (ngModelChange)="onTypeChange($event)" placeholder="设备类型">
+      <option *ngFor="let i of deviceTypeList" [value]="i.value">{{i.name}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row" *ngIf="deviceType === 'HIK_VIEW'">
+  <div class="col-sm-1 query_label">
+    <label class="">型号：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="hikViewModel" (ngModelChange)="onHikViewChange($event)">
+      <option *ngFor="let i of hikView" [value]="i">{{i}}</option>
+    </select>
+  </div>
+
+  <div class="col-sm-1 query_label">
+    <label> 序列号：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="hikViewSerial">
+  </div>
+
+  <div class="col-sm-1 query_label">
+    <label> 验证码：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="validateCode">
+  </div>
+</div>
+
+<div class="row" *ngIf="deviceType === 'HIK_FACE'">
+  <div class="col-sm-1 query_label">
+    <label class="">型号：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="hikFaceModel" (ngModelChange)="onHikFaceChange($event)">
+      <option *ngFor="let i of hikFace" [value]="i">{{i}}</option>
+    </select>
+  </div>
+
+  <div class="col-sm-1 query_label">
+    <label> 序列号：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="hikFaceSerial">
+  </div>
+
+  <div class="col-sm-1 query_label">
+    <label> 设备名称：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="deviceName">
+  </div>
+
+  <div class="col-sm-1 query_label">
+    <label> 编号：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="deviceNumber">
+  </div>
+</div>
+
+<div class="row" *ngIf="deviceType === 'FIRS_HEAD'">
+  <div class="col-sm-1 query_label">
+    <label class="">型号：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="firsHeadModel" (ngModelChange)="onFirsHeadChange($event)">
+      <option *ngFor="let i of firsHead" [value]="i">{{i}}</option>
+    </select>
+  </div>
+
+  <div class="col-sm-1 query_label">
+    <label> 序列号：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="firsHeadSerial">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="addDevice()" >添加</button>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{companyName}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-company-tree [company]="companyId" [onlySelectShop]="true" [staticModal]="staticModal" (change)="getOrgInfo($event)"></app-company-tree>
+      </div>
+    </div>
+  </div>
+</div>

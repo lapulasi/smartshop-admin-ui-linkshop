@@ -1,0 +1,43 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <!--/.col-->
+    <div class="col-lg-6 col-lg-offset-3">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Striped Table
+        </div>
+        <div class="card-block">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>地址</th>
+                <th>面积</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let shop of shops">
+                <td>{{shop.id}}</td>
+                <td>{{shop.name}}</td>
+                <td>{{shop.address}}</td>
+                <td>{{shop.area}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

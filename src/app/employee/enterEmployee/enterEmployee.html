@@ -1,0 +1,59 @@
+<!--<form method="post" (ngSubmit)="submitForm()" #loginForm="ngForm">-->
+  <div class="row">
+    <app-company-list class="col-sm-3" [organizationName]="organizationName" [orgShow]="true" (change)="getCompanyInfo($event, staticModal)"></app-company-list>
+    <!--<div class="col-sm-1">
+      <label class="query_label">公司：</label>
+    </div>
+    <div class="form-group col-sm-2">
+      <select class="form-control" [(ngModel)]="company" (ngModelChange)="onCompanyChange($event, staticModal)">
+        <option value=""></option>
+        <option *ngFor="let i of companyList; index as currIndex" [value]="currIndex">{{i.name}}</option>
+      </select>
+    </div>-->
+  </div>
+
+  <div class="row">
+    <div class="col-sm-1">
+      <label class="query_label">姓名：</label>
+    </div>
+    <div class="form-group col-sm-2">
+      <input type="text" class="form-control" [(ngModel)]="name">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-1">
+      <label class="query_label">电话：</label>
+    </div>
+    <div class="form-group col-sm-2">
+      <input type="text" class="form-control" [(ngModel)]="phone">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-1">
+      <button class="btn btn-primary" type="button" (click)="query()">确定</button>
+    </div>
+  </div>
+
+
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{companyName}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-company-tree [company]="companyId" [staticModal]="staticModal"
+                          (change)="getOrgInfo($event)"></app-company-tree>
+      </div>
+    </div>
+  </div>
+</div>
+

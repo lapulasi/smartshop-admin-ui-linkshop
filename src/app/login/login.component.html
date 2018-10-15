@@ -1,0 +1,38 @@
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card-group mb-0">
+          <div class="card p-4">
+
+            <form method="post" (ngSubmit)="submitForm()" #loginForm="ngForm">
+              <div class="card-block">
+                <h1>Login</h1>
+                <p class="text-muted">Sign In to your account</p>
+                <div class="input-group mb-3">
+                  <span class="input-group-addon"><i class="icon-user"></i></span>
+                  <input [(ngModel)]="user.userName" required #userName="ngModel" name="userName" type="text" class="form-control" placeholder="Username">
+                  <span class="help-block" [hidden]="userName.valid || userName.pristine">请输入用户名</span>
+                </div>
+                <div class="input-group mb-4">
+                  <span class="input-group-addon"><i class="icon-lock"></i></span>
+                  <input [(ngModel)]="user.userPwd" required #passWd="ngModel" name="userPwd" type="password" class="form-control" placeholder="Password">
+                  <span class="help-block" [hidden]="passWd.valid || passWd.pristine">请输入密码</span>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <button type="submit" [disabled]="!loginForm.form.valid&&status" class="btn btn-primary px-4">Login</button>
+                  </div>
+                  <div class="col-6 text-right">
+                    <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                  </div>
+                </div>
+              </div>
+          </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

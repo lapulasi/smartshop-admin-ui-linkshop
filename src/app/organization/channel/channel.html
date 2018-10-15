@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-sm-1">
+    <label class="query_label">渠道品牌：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [ngModel]="channelBrand" (ngModelChange)="onChannelBrandChange($event)">
+      <option value=""></option>
+      <option *ngFor="let i of channelBrand" [value]="i.id">{{i.name}}</option>
+    </select>
+  </div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="query()">查询</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="addChannelBrand()">新增渠道品牌</button>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="addChannel()">新增渠道</button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">渠道品牌</th>
+        <th class="text-center">渠道</th>
+        <th class="text-center">省</th>
+        <th class="text-center">市</th>
+        <th class="text-center">区</th>
+        <th class="text-center">地址</th>
+        <th class="text-center">地理位置</th>
+        <th class="text-center">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of channelBrandList">
+        <td>{{i.channelTypeName}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.province}}</td>
+        <td>{{i.city}}</td>
+        <td>{{i.area}}</td>
+        <td>{{i.address}}</td>
+        <td>{{i.geo_coord}}</td>
+        <td><a [routerLink]="['/organization/channel/updateChannel/', i.id]">修改</a></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

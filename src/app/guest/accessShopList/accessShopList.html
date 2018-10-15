@@ -1,0 +1,123 @@
+<script src="accessShopList.component.ts"></script>
+<div class="row">
+  <app-company-list class="col-sm-3" [organizationName]="organizationName" [orgShow]="true" (change)="getCompanyInfo($event, staticModal)"></app-company-list>
+  <!--<div class="col-sm-1 query_label">
+    <label class="">公司：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [ngModel]="company" (ngModelChange)="onCompanyChange($event, staticModal)" >
+      <option value=""></option>
+      <option *ngFor="let i of brandList" [value]="i.id">{{i.name}}</option>
+    </select>
+  </div>-->
+</div>
+
+<div class="row">
+  <div class="col-sm-1 query_label">
+    <label class="">时间：</label>
+  </div>
+  <div class="col-sm-2 form-group">
+    <input type="text"
+           placeholder="请选择时间"
+           class="form-control"
+           bsDaterangepicker [(ngModel)]="bsRangeValue"/>
+  </div>
+  <div class="col-sm-1 query_label">
+    <label class="">顾客ID：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input class="form-control" [(ngModel)]="guestId" name="guestId" placeholder="请输入顾客id">
+  </div>
+  <div class="col-sm-2 query_label">
+    <label class="">显示已排除：</label>
+  <!--</div>
+  <div class="col-sm-1 query_label">-->
+    <input type="checkbox" [checked]="showExcludedGuest" (change)="showExcludedGuest= !showExcludedGuest" >
+  </div>
+</div>
+
+<div class="row">
+  <!--<div class="col-sm-2">
+    <input class="form-control" name="startDate" placeholder="请选择开始时间" type="text"
+           [ngModel]="startDate | date: 'yyyy-MM-dd'" (focus)="showDate1=true;showDate2=false;">
+
+    <div *ngIf="showDate1" style="position:absolute;z-index: 99;top: 2.5em;">
+      <datepicker [(ngModel)]="startDate" (selectionDone)="showDate1=false;"></datepicker>
+    </div>
+  </div>
+
+  <div style="line-height: 2.25">-&#45;&#45;</div>
+  <div class="col-sm-2">
+    <input class="form-control" name="startDate" placeholder="请选择结束时间" type="text"
+           [ngModel]="endDate | date: 'yyyy-MM-dd'" (focus)="showDate1=false;showDate2=true;">
+
+    <div *ngIf="showDate2" style="position:absolute;z-index: 99;top: 2.5em;">
+      <datepicker [(ngModel)]="endDate" (selectionDone)="showDate2=false;"></datepicker>
+    </div>
+  </div>-->
+
+</div>
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="check()" >查询</button>
+  </div>
+</div>
+<br>
+
+<div class="card" (click)="showDate1=false;showDate2=false;">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">门店</th>
+        <th class="text-center">时间</th>
+        <th class="text-center">头像</th>
+        <th class="text-center">用户ID</th>
+        <th class="text-center">性别</th>
+        <th class="text-center">年龄</th>
+        <th class="text-center">抓拍数</th>
+        <th class="text-center">时长</th>
+        <th class="text-center">排除</th>
+        <!--<th class="text-center">操作</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of accessList | accessLogFilter:showExcludedGuest"
+        [ngClass]="{'danger': item.exclude}">
+        <td>{{item.shop_id}}</td>
+        <td>{{item.time | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td class="headImg" width="10%"><a href="{{imgPrefix}}{{item.head_img}}"><img src="{{imgPrefix}}{{item.head_img}}" class="img-avatar" width="40" height="40"/></a></td>
+        <td>{{item.guest_id}}</td>
+        <td>{{item.gender == 'F' ? '女' : '男'}}</td>
+        <td>{{item.age}}</td>
+        <td>{{item.accessCount}}</td>
+        <td>{{item.stayMin | number:'1.1-2'}}</td>
+        <td>{{item.exclude ? 'Y' : 'N'}}</td>
+        <!--<td><a href="javascript:;" (click)="operate(i)">添加到排除列表</a></td>-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-left: 20px;">
+    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="9" (pageChanged)="pageChanged($event)" [itemsPerPage]="pageSize"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{organizationName}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-company-tree [company]="companyId" [staticModal]="staticModal" (change)="getOrgInfo($event)"></app-company-tree>
+      </div>
+    </div>
+  </div>
+</div>

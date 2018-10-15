@@ -1,0 +1,55 @@
+<h3>添加组织</h3>
+<div class="row" *ngIf="!isOrgRoot">
+  <p class="col-sm-2">父级组织：</p>
+  <p class="col-sm-2">{{parentName}}</p>
+</div>
+<div class="row">
+  <p class="col-sm-2">组织层级：</p>
+  <p class="col-sm-2">{{orgLevel}}</p>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">组织名称：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="orgName">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">地址：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="address">
+  </div>
+  <div class="form-group col-sm-2">
+    <!--<a href="javascript:;" (click)="mapHidden = false">请选择</a>-->
+    <button (click)="getGeoCode()">获取位置</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">中心位置：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="geoCoord">
+  </div>
+</div>
+
+<!--<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">边界坐标：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="from-group" [(ngModel)]="boundry">
+  </div>
+</div>-->
+<div class="row">
+  <div class="col-sm-2">
+    <button class="btn btn-primary" type="button" (click)="addOrgan()" *ngIf="!isAddShop">确定</button>
+    <button class="btn btn-primary" type="button" (click)="addOrgan()" *ngIf="isAddShop">下一步</button>
+  </div>
+</div>
+<div class="row">
+  <!--<app-map (change)="pointChange($event)"></app-map>-->
+</div>

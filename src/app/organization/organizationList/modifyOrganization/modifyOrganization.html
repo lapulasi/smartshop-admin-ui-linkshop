@@ -1,0 +1,34 @@
+<h3>修改组织</h3>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">组织名称：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="orgName">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">中心点位置：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="geoCoord">
+  </div>
+</div>
+<!--<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">边界坐标：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="from-group" [(ngModel)]="boundry">
+  </div>
+</div>-->
+<div class="row">
+  <div class="col-sm-2">
+    <button class="btn btn-primary" type="button" (click)="changeOrgan()">确定</button>
+  </div>
+</div>
+
+<div class="row">
+  <!--<app-map (change)="pointChange($event)"></app-map>-->
+</div>

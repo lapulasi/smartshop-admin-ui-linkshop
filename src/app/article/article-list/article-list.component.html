@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-sm-1 query_label">
+    <label class="">标题：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="title">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1 query_label">
+    <label class="">作者：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="author">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="query()" >查询</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">序号</th>
+        <th class="text-center">标题</th>
+        <th class="text-center">作者</th>
+        <th class="text-center">类型</th>
+        <th class="text-center">状态</th>
+        <th class="text-center">时间</th>
+        <th class="text-center">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of result?.content; index as i">
+        <td>{{i + 1}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.author}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.status === 0 ? '未发布': '已发布'}}</td>
+        <td>{{item.time | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td><a href="javascript:;" (click)="gotoEdit(item.id)">编辑</a>&nbsp;&nbsp;
+          <a *ngIf="item.status === 0" (click)="publishArticle(item.id)" href="javascript:;">发布</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div style="margin-left: 20px;">
+  <pagination [boundaryLinks]="true" [totalItems]="result?.totalElements" [maxSize]="9" (pageChanged)="pageChanged($event)"
+              [itemsPerPage]="result?.size"
+              previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+</div>

@@ -1,0 +1,175 @@
+.red{
+  color: red!important;
+}
+.show{
+  display: block;
+}
+.tree {
+  min-height:20px;
+  padding:19px;
+  margin-bottom:20px;
+  background-color:#fbfbfb;
+  border:1px solid #999;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px;
+  -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.tree li {
+  list-style-type:none;
+  margin:0;
+  padding:10px 5px 0 5px;
+  position:relative;
+  display: block;
+}
+.tree li::before, .tree li::after {
+  content:'';
+  left:-36px;
+  position:absolute;
+  right:auto
+}
+.tree li::before {
+  border-left:1px solid #999;
+  bottom:50px;
+  height:100%;
+  top:0;
+  width:1px
+}
+.tree li::after {
+  border-top:1px solid #999;
+  height:20px;
+  top:25px;
+  width:25px
+}
+.tree li span {
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border:1px solid #999;
+  border-radius:5px;
+  display:inline-block;
+  padding:3px 8px;
+  text-decoration:none
+}
+.tree li.parent_li>span {
+  cursor:pointer
+}
+.tree>ul>li::before, .tree>ul>li::after {
+  border:0
+}
+.tree li:last-child::before {
+  height:30px
+}
+.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
+  background:#eee;
+  border:1px solid #94a0b4;
+  color:#000
+}
+
+select.form-control {
+  height: 40px !important;
+}
+
+.nav-item ul.nav-dropdown-items {
+  padding-left: 10px !important;
+}
+
+input.form-control{
+  height: 40px;
+}
+
+.headImg {
+  position: relative;
+}
+
+.headImg:hover{
+  height: 57px;
+}
+
+.headImg:hover img{
+  position: absolute;
+  animation: myfirst .6s;
+  -moz-animation: myfirst .6s;	/* Firefox */
+  -webkit-animation: myfirst .6s;	/* Safari 和 Chrome */
+  -o-animation: myfirst .6s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes myfirst
+{
+  from {
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 50%;
+    margin-left: -50px;
+  }
+  to {
+    width: 100px;
+    height: 100px;
+    top: -21px;
+    left: 50%;
+    margin-left: -50px;
+  }
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+  from {
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 50%;
+    margin-left: -50px;
+  }
+  to {
+    width: 100px;
+    height: 100px;
+    top: -21px;
+    left: 50%;
+    margin-left: -50px;
+  }
+}
+
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+  from {
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 50%;
+    margin-left: -50px;
+  }
+  to {
+    width: 100px;
+    height: 100px;
+    top: -21px;
+    left: 50%;
+    margin-left: -50px;
+  }
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+  from {
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 50%;
+    margin-left: -50px;
+  }
+  to {
+    width: 100px;
+    height: 100px;
+    top: -21px;
+    left: 50%;
+    margin-left: -50px;
+  }
+}
+
+/*heat map custom css*/
+@import "~nouislider/distribute/nouislider.css";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@import "assets/css/nouislider-custom.css";

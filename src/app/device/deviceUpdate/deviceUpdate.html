@@ -1,0 +1,80 @@
+<div class="card">
+  <div class="card-header">
+    <strong>修改设备{{dv.id}}</strong>
+  </div>
+  <form class="form-horizontal" enctype="multipart/form-data" method="post"  (ngSubmit)="submitForm()" #deviceForm="ngForm">
+    <div class="card-block">
+
+      <div class="form-group row">
+        <label class="col-md-3 form-control-label" >设备编号</label>
+        <div class="col-md-9">
+          <input [(ngModel)]="dv.code" name="code" #code="ngModel" required class="form-control" placeholder="请输入设备编号" type="text">
+          <span class="help-block tips-color" [hidden]="code.valid || code.pristine">请输入设备编号</span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 form-control-label">公司</label>
+        <div class="col-md-9">
+          <select class="form-control" name="brandId" [ngModel]="dv.brandId" #brandId="ngModel" required (ngModelChange)="onBrandChange($event)">
+            <option *ngFor="let i of brandList" [value]="i.id">{{i.name}}</option>
+          </select>
+          <span class="help-block tips-color" [hidden]="brandId.valid || brandId.pristine">请选择公司</span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 form-control-label">门店</label>
+        <div class="col-md-9">
+          <select class="form-control" name="shopId"  [(ngModel)]="dv.shopId" required #shopId="ngModel">
+            <option *ngFor="let i of shopList" [value]="i.id">{{i.name}}</option>
+          </select>
+          <span class="help-block tips-color" [hidden]="shopId.valid || shopId.pristine">请选择门店</span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 form-control-label">系统</label>
+        <div class="col-md-9">
+          <select class="form-control" name="systemId" [(ngModel)]="dv.systemId" required #systemId="ngModel">
+            <option *ngFor="let i of versionList" [value]="i.id">{{i.version}}</option>
+          </select>
+          <span class="help-block tips-color" [hidden]="systemId.valid || systemId.pristine">请选择系统</span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 form-control-label">类型</label>
+        <div class="col-md-9">
+          <select class="form-control" name="type" [(ngModel)]="dv.type" required #type="ngModel" >
+            <option value="IN">IN</option>
+            <option value="OUT">OUT</option>
+          </select>
+          <span class="help-block tips-color" [hidden]="type.valid || type.pristine">请选择类型</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-sm btn-primary" type="submit" [disabled]="!deviceForm.form.valid"><i class="fa fa-dot-circle-o"></i> 提交</button>
+      <!--<button class="btn btn-sm btn-danger" type="reset"><i class="fa fa-ban"></i> 返回</button>-->
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">提示</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        修改成功！
+      </div>
+    </div>
+  </div>
+</div>

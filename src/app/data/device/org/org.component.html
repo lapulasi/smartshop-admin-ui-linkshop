@@ -1,0 +1,93 @@
+<div class="row">
+  <app-company-list class="col-sm-3" [organizationName]="organizationName" [orgShow]="true" (change)="getCompanyInfo($event, staticModal)"></app-company-list>
+</div>
+
+<div class="row">
+  <div class="col-sm-1">
+    <label class="query_label">层级：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [disabled]="isLevelData" [(ngModel)]="levelId" placeholder="请先选择组织">
+      <option value=""></option>
+      <option value="113" *ngFor="let i of levelList" [value]="i.id">{{i.name}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1 query_label">
+    <label class="">日期：</label>
+  </div>
+  <div class="col-sm-2 form-group">
+    <input type="text"
+           placeholder="请选择时间"
+           class="form-control"
+           bsDaterangepicker [(ngModel)]="bsRangeValue"/>
+  </div>
+  <p class="col-sm-4">(如果查询单日数据<例如：T日>，日期范围请选择T -- T+1)</p>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="query()" >查询</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">序号</th>
+        <th class="text-center">组织名称</th>
+        <th class="text-center">门店数</th>
+        <th class="text-center">设备数</th>
+        <th class="text-center">平均故障率</th>
+        <th class="text-center">工作日</th>
+        <th class="text-center">非工作日</th>
+        <th class="text-center">人脸</th>
+        <th class="text-center">全景</th>
+        <th class="text-center">A类</th>
+        <th class="text-center">B类</th>
+        <th class="text-center">C类</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of resultList; index as i;">
+        <td>{{i+1}}</td>
+        <td (click)="toShopPage(item.id, item.name)"><a href="javascript:;">{{item['name']}}</a></td>
+        <td>{{item['shopNum']}}</td>
+        <td>{{item['deviceNum']}}</td>
+        <td>{{item['avgAbnormalRate'] | number: '1.0-2'}}</td>
+        <td>{{item['weekRate']['workday'] | number: '1.0-2'}}</td>
+        <td>{{item['weekRate']['weekend'] | number: '1.0-2'}}</td>
+        <td>{{item['IN'] | number: '1.0-2'}}</td>
+        <td>{{item['VIEW'] | number: '1.0-2'}}</td>
+        <td>{{item['gradeRate']['A'] | number: '1.0-2'}}</td>
+        <td>{{item['gradeRate']['B'] | number: '1.0-2'}}</td>
+        <td>{{item['gradeRate']['C'] | number: '1.0-2'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{organizationName}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-company-tree [company]="companyId" [staticModal]="staticModal"
+                          (change)="getOrgInfo($event)"></app-company-tree>
+      </div>
+    </div>
+  </div>
+</div>

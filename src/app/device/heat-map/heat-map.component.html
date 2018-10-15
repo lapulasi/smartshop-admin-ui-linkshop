@@ -1,0 +1,14 @@
+<p>
+  <img [src]=" imgPrefix + (heatMapBg$ | async )?.heatmap_background" >
+</p>
+<form action="" class="form-horizontal" enctype="multipart/form-data" method="post" (submit)="uploadHeatMapBg()">
+
+  <div class="form-group row">
+    <label class="col-md-3 form-control-label" for="file-input">上传背景图片</label>
+    <div class="col-md-9">
+      <input #fileInput id="file-input" name="file-input" type="file" />
+    </div>
+    <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-dot-circle-o"></i> 上传背景图片</button>
+
+  </div>
+</form>

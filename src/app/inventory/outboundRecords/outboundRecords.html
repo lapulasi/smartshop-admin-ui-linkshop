@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-sm-1">
+    <label class="query_label">批次：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="batchNo" placeholder="格式：201801">
+  </div>
+
+  <div class="col-sm-1">
+    <label class="query_label">类型：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="cameraType">
+      <option value=""></option>
+      <option value="113">全景</option>
+      <option value="112">人脸</option>
+    </select>
+  </div>
+
+  <div class="col-sm-1">
+    <label class="query_label">操作类型：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="operateType">
+      <option value=""></option>
+      <option value="OUT">出库</option>
+      <option value="BACK">归还</option>
+      <!--<option *ngFor="let i of circleSubList" [value]="i.shangquanId">{{i.shangquanName}}</option>-->
+    </select>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-sm-1 query_label">
+    <label class="">时间：</label>
+  </div>
+  <div class="col-sm-2 form-group">
+    <input type="text"
+           placeholder="请选择时间"
+           class="form-control"
+           bsDaterangepicker [(ngModel)]="bsRangeValue"/>
+  </div>
+
+  <div class="col-sm-1">
+    <label class="query_label">UID：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="deviceUId">
+  </div>
+
+</div>
+<br/>
+<!--<div class="row">
+
+  <div class="col-sm-1"></div>
+
+</div>-->
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" type="button" (click)="check()" >查询</button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">批次</th>
+        <th class="text-center">类型</th>
+        <th class="text-center">UID</th>
+        <th class="text-center">操作类型</th>
+        <th class="text-center">时间</th>
+        <th class="text-center">经手人</th>
+        <th class="text-center">安装公司</th>
+        <th class="text-center">安装地点</th>
+        <th class="text-center">备注</th>
+        <!--<th class="text-center">操作</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of recordsList">
+        <td>{{i.batch_no}}</td>
+        <td>{{i.camera_type==='112' ? '人脸': '全景'}}</td>
+        <td>{{i.uid}}</td>
+        <td>{{i.operate_type==='OUT' ? '出库': (i.operate_type==='BACK' ? '归还':'')}}</td>
+        <td>{{i.time |date: 'yyyy-MM-dd'}}</td>
+        <td>{{i.user}}</td>
+        <td>{{i.company}}</td>
+        <td>{{i.address}}</td>
+        <td>{{i.remark}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div style="margin-left: 20px;">
+    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="9" (pageChanged)="pageChanged($event)" [itemsPerPage]="pageSize"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+  </div>
+</div>

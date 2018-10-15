@@ -1,0 +1,135 @@
+<h3>修改店铺</h3>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">店铺名称：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="storeName">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">渠道名称：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="channelName">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">店铺等级：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="storeBrand" (ngModelChange)="onStoreBrandChange($event)">
+      <option value=""></option>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+  </div>
+</div>
+<!--<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">卖场品牌：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="storeBrand" (ngModelChange)="onStoreBrandChange($event)">
+      <option value=""></option>
+      <option *ngFor="let i of brandList" [value]="i.channelTypeId">{{i.channelTypeName}}</option>
+      &lt;!&ndash;<option *ngFor="let i of brandList; index as currentIndex" [value]="currentIndex">{{i.channelTypeName}}</option>&ndash;&gt;
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">卖场名称：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="brandName" (ngModelChange)="onBrandNameChange($event)">
+      <option value=""></option>
+      <option *ngFor="let i of brandNameList" [value]="i.channelId">{{i.channelName}}</option>
+    </select>
+  </div>
+</div>-->
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">店铺面积：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="shopArea">
+  </div>
+  <p class="col-sm-1 textLeft">平方</p>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">店铺营业时长：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="workTime">
+  </div>
+  <p class="col-sm-1 textLeft">h</p>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">员工数：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="staffNum">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">地址：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="address">
+  </div>
+  <div class="form-group col-sm-2">
+    <!--<a href="javascript:;" (click)="mapHidden = false">请选择</a>-->
+    <button (click)="getGeoCode()">获取位置</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">经度：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="geoLng">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">纬度：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="geoLat">
+  </div>
+</div>
+<!--<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">地理位置：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    &lt;!&ndash;<a href="javascript:;" (click)="mapHidden = false">请选择</a>&ndash;&gt;
+    <button >请选择</button>
+  </div>
+</div>-->
+<!--<div class="row">
+  <div class="col-sm-2">
+    店铺全景：
+  </div>
+  <div class="col-sm-2">
+    <button class="btn btn-primary" type="button" (click)="query()">选择</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-6">
+    <img class="shopImg" src="../../../../assets/img/logo.png" alt="">
+  </div>
+</div>-->
+<div class="row">
+  <div class="col-sm-2">
+    <button class="btn btn-primary" type="button" (click)="updateShop()">确定</button>
+  </div>
+</div>

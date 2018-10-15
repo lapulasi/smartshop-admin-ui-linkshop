@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-sm-1">
+    <label class="query_label">公司：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="company" (ngModelChange)="onCompanyChange($event)">
+      <option value=""></option>
+      <option *ngFor="let i of companyList; index as currIndex" [value]="currIndex">{{i.name}}</option>
+    </select>
+  </div>
+</div>
+<div class="tree well">
+  <ul>
+    <li class="parent_li">
+      <span><i class="icon-folder-alt" (click)="select()"></i> {{companyName}} <!--<a routerLinkActive="active" (click)="select()">选择</a>--></span>
+      <ul>
+        <li *ngFor="let i of treeData; " [ngClass]="{'parent_li': i.children!==null}">
+          <span *ngIf="i.level===2"><i class="icon-minus-sign"></i> {{i.name}} <a href="javascript:;" (click)="choose(i)"> 选择</a></span>
+          <span *ngIf="i.level===1"><i class="icon-leaf"></i> {{i.name}} <a href="javascript:;" (click)="choose(i)">选择</a></span>
+          <!--<span *ngIf="i.level!==1 && i.level!==2"><i class="icon-folder-alt"></i> {{i.name}} <a routerLinkActive="active" [routerLink]="[path===1? '/employee/enterEmployee':'/employee/ManagerOnDuty']" [queryParams]="{'name': i.name,'parentOrgId':i.id}">选择</a></span>-->
+          <span *ngIf="i.level!==1 && i.level!==2"><i class="icon-folder-alt"></i> {{i.name}} <a href="javascript:;" (click)="choose(i)">选择</a></span>
+          <ul>
+            <li *ngFor="let j of i.children" [ngClass]="{'parent_li': j.children!==null}">
+              <span *ngIf="j.level===2"><i class="icon-minus-sign"></i> {{j.name}} <a href="javascript:;" (click)="choose(j)">选择</a></span>
+              <span *ngIf="j.level===1"><i class="icon-leaf"></i> {{j.name}} <a href="javascript:;" (click)="choose(j)">选择</a></span>
+              <span *ngIf="j.level!==1 && j.level!==2"><i class="icon-folder-alt"></i> {{j.name}} <a href="javascript:;" (click)="choose(j)">选择</a> </span>
+              <ul>
+                <li *ngFor="let k of j.children" [ngClass]="{'parent_li': k.children!==null}">
+                  <span *ngIf="k.level===2"><i class="icon-minus-sign"></i> {{k.name}} <a href="javascript:;" (click)="choose(k)">选择</a></span>
+                  <span *ngIf="k.level===1"><i class="icon-leaf"></i> {{k.name}} <a href="javascript:;" (click)="choose(k)">选择</a></span>
+                  <span *ngIf="k.level!==1 && k.level!==2"><i class="icon-folder-alt"></i> {{k.name}} <a href="javascript:;" (click)="choose(k)">选择</a></span>
+                  <ul *ngIf="k.level!==1 || k.level!==2">
+                    <li *ngFor="let m of k.children; index as leave_2_index" [ngClass]="{'parent_li': m.children!==null}">
+                      <span *ngIf="m.level===1"><i class="icon-leaf"></i> {{m.name}} <a href="javascript:;" (click)="choose(m)">选择</a></span>
+                      <span *ngIf="m.level===2"><i class="icon-minus-sign"></i> {{m.name}} <a href="javascript:;" (click)="choose(m)">选择</a></span>
+                      <ul>
+                        <li *ngFor="let n of m.children">
+                          <span *ngIf="n.level===1"><i class="icon-leaf"></i> {{n.name}} <a href="javascript:;" (click)="choose(n)">选择</a></span>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+
+</div>

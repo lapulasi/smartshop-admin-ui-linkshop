@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">批次</th>
+        <th class="text-center">类型</th>
+        <th class="text-center">状态</th>
+        <th class="text-center">出库数</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of viewList">
+        <td>{{item.batch_no}}</td>
+        <td>{{item.camera_type==='112' ? '人脸': '全景'}}</td>
+        <td>{{item.status===1 ? '库存':'出库'}}</td>
+        <td>{{item.count}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

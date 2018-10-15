@@ -1,0 +1,78 @@
+
+  <div  style="display: inline-block;">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="row">
+      <div class="col-sm-2">
+        <label class="query_label">公司：</label>
+      </div>
+      <div class="form-group col-sm-6">
+        <select class="form-control" [(ngModel)]="company" (ngModelChange)="onCompanyChange($event)" placeholder="公司名">
+          <option value=""></option>
+          <option *ngFor="let i of companyList; index as currIndex" [value]="i.id">{{i.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <label class="query_label">门店：</label>
+      </div>
+      <div class="form-group col-sm-6">
+        <select class="form-control" [(ngModel)]="shop" (ngModelChange)="onShopChange($event)" placeholder="门店名">
+          <option value=""></option>
+          <option *ngFor="let i of shopList$ | async" [value]="i.id+'-'+i.orgCode">{{i.orgObj.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-2 query_label">
+        <label class="">开始时间：</label>
+      </div>
+      <div class="col-sm-6">
+        <input class="form-control" name="startDate" placeholder="请选择开始时间" type="text"
+               [ngModel]="startDate | date: 'yyyy-MM-dd'" (focus)="showDate1=true;showDate2=false;">
+
+        <div *ngIf="showDate1" style="position:absolute;z-index: 99;top: 2.5em;">
+          <datepicker [(ngModel)]="startDate" (selectionDone)="showDate1=false;"></datepicker>
+        </div>
+      </div>
+      <div class="col-auto"><timepicker [(ngModel)]="startTime"></timepicker></div>
+
+      <!--<div style="line-height: 2.25">-&#45;&#45;</div>-->
+
+    </div>
+    <div class="row">
+      <div class="col-sm-2 query_label">
+        <label class="">结束时间：</label>
+      </div>
+      <div class="col-sm-6">
+        <input class="form-control" name="startDate" placeholder="请选择结束时间" type="text"
+               [ngModel]="endDate | date: 'yyyy-MM-dd'" (focus)="showDate1=false;showDate2=true;">
+
+        <div *ngIf="showDate2" style="position:absolute;z-index: 99;top: 2.5em;">
+          <datepicker [(ngModel)]="endDate" (selectionDone)="showDate2=false;"></datepicker>
+        </div>
+      </div>
+      <div class="col-auto">
+        <timepicker [(ngModel)]="endTime"></timepicker>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto"></div>
+      <div class="col-auto">
+        <button class="btn btn-primary" type="button" (click)="showHeatMap()" >确定</button>
+      </div>
+    </div>
+    <br>
+    <div class="row" style="background-color: #f7f7f9">
+      <!--<div class="col-sm-3"></div>-->
+      <div class="col-auto">
+
+        <app-heat-map #appHeatMap [org]="org" [shopId]="shopId"></app-heat-map>
+      </div>
+      <!--<div class="col-sm-4"></div>-->
+    </div>
+  </div>
+

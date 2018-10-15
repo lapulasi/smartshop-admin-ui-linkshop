@@ -1,0 +1,62 @@
+<div class="row">
+  <app-company-list class="col-sm-3" [organization]="true" (change)="getCompanyInfo($event)"></app-company-list>
+  <!--<div class="col-sm-1">
+    <label class="query_label">公司：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [(ngModel)]="company" (ngModelChange)="onCompanyChange($event)" placeholder="公司名">
+      <option value=""></option>
+      <option *ngFor="let i of companyList; index as currIndex" [value]="currIndex">{{i.name}}</option>
+    </select>
+  </div>-->
+  <div class="col-sm-2 "></div>
+  <div class="col-sm-1">
+    <button *ngIf="orgRoot"><a routerLinkActive="active" [routerLink]="[addOrgUrl]" [queryParams]="{'name': treeData?.name,'parentOrgId':treeData?._id,'companyId': companyId,'levelId': treeData?.levelId, 'isOrgRoot': orgRoot}">添加组织</a></button>
+  </div>
+  <div class="col-sm-6 ">
+    <ul class="row" style="list-style: none">
+      <li class="col-sm-3"><span class="fa fa-edit fa-lg"></span>修改</li>
+      <li class="col-sm-3"><span class="fa fa-plus-square-o fa-lg"></span>增加组织</li>
+      <li class="col-sm-3"><span class="icon-plus"></span>增加店铺</li>
+      <li class="col-sm-3"><span class="fa fa-trash-o fa-lg"></span>删除</li>
+    </ul>
+  </div>
+</div>
+
+<div class="tree well">
+  <ul>
+    <li class="parent_li"> <!--[ngClass]="{'parent_li': treeData?.children!==null}"-->
+      <span *ngIf="treeData"><i class="fa fa-folder-open-o"></i> {{treeData?.name}} <a routerLinkActive="active" [routerLink]="[modifyOrgUrl]" [queryParams]="{'name': treeData?.name,'parentOrgId':treeData?._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a routerLinkActive="active" [routerLink]="[addOrgUrl]" [queryParams]="{'name': treeData?.name,'parentOrgId':treeData?._id,'companyId': companyId,'levelId': treeData?.levelId}" [ngClass]="{'fa fa-plus-square-o fa-lg': !treeData?.isShop}"></a> <a href="javascript:;"  class="fa fa-lg" [ngClass]="{'fa-trash-o': treeData?.children && treeData?.children.length===0 || treeData?.children === undefined}" (click)="deleteOrg($event, treeData?._id, treeData?.children)"></a></span>
+      <ul>
+        <li *ngFor="let i of treeData?.children; index as leave_5_index " [ngClass]="{'parent_li': i.children!==null}">
+          <span *ngIf="i.isShop"><i class="fa fa-leaf"></i> {{i.name}} <a routerLinkActive="active" [routerLink]="[modifyShopUrl]" [queryParams]="{'name': i.name,'parentOrgId':i._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a href="javascript:;" class="fa fa-trash-o fa-lg" (click)="deleteOrg($event, i._id)"></a></span>
+          <span *ngIf="!i.isShop"><i class="fa fa-folder-o"></i> {{i.name}} <a routerLinkActive="active" [routerLink]="[modifyOrgUrl]" [queryParams]="{'name': i.name,'parentOrgId':i._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a routerLinkActive="active" [routerLink]="[addOrgUrl]" [queryParams]="{'name': i.name,'parentOrgId':i._id,'companyId': companyId,'levelId': i.levelId}" [ngClass]="{'fa fa-plus-square-o fa-lg': !i.isShop}"></a> <a href="javascript:;"  class="fa fa-lg" [ngClass]="{'fa-trash-o': (i.children && i.children.length===0) || i.children === undefined}" (click)="deleteOrg($event, i._id, i.children)"></a></span>
+          <ul>
+            <li style="display: none" *ngFor="let j of i.children; index as leave_4_index" [ngClass]="{'parent_li': j.children!==null}">
+              <span *ngIf="j.isShop"><i class="fa fa-leaf"></i> {{j.name}} <a routerLinkActive="active" [routerLink]="[modifyShopUrl]" [queryParams]="{'name': j.name,'parentOrgId':j._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a href="javascript:;" class="fa fa-trash-o fa-lg" (click)="deleteOrg($event, j._id)"></a></span>
+              <span *ngIf="!j.isShop"><i class="fa fa-folder-open-o"></i> {{j.name}} <a routerLinkActive="active" [routerLink]="[modifyOrgUrl]" [queryParams]="{'name': j.name,'parentOrgId':j._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a routerLinkActive="active" [routerLink]="[addOrgUrl]" [queryParams]="{'name': j.name,'parentOrgId':j._id,'companyId': companyId,'levelId': j.levelId}" [ngClass]="{'fa fa-plus-square-o fa-lg': !j.isShop}"></a> <a href="javascript:;" class="fa fa-lg" [ngClass]="{'fa-trash-o':j.children && j.children.length===0 || j.children === undefined}" (click)="deleteOrg($event, j._id, j.children)"></a></span>
+              <ul>
+                <li *ngFor="let k of j.children; index as leave_3_index" [ngClass]="{'parent_li': k.children!==null}">
+                  <span *ngIf="k.isShop"><i class="fa fa-leaf"></i> {{k.name}} <a routerLinkActive="active" [routerLink]="[modifyShopUrl]" [queryParams]="{'name': k.name,'parentOrgId':k._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a href="javascript:;" class="fa fa-trash-o fa-lg" (click)="deleteOrg($event, k._id)"></a></span>
+                  <span *ngIf="!k.isShop"><i class="fa fa-folder-open-o"></i> {{k.name}} <a routerLinkActive="active" [routerLink]="[modifyOrgUrl]" [queryParams]="{'name': k.name,'parentOrgId':k._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a routerLinkActive="active" [routerLink]="[addOrgUrl]" [queryParams]="{'name': k.name,'parentOrgId':k._id,'companyId': companyId,'levelId': k.levelId}" [ngClass]="{'fa fa-plus-square-o fa-lg': !k.isShop}"></a> <a href="javascript:;"  class="fa fa-lg" [ngClass]="{'fa-trash-o': k.children && k.children.length===0 || k.children === undefined}" (click)="deleteOrg($event, k._id, k.children)"></a></span>
+                  <ul>
+                    <li *ngFor="let m of k.children; index as leave_2_index" [ngClass]="{'parent_li': m.children!==null}">
+                      <span *ngIf="m.isShop"><i class="fa fa-leaf"></i> {{m.name}} <a routerLinkActive="active" [routerLink]="[modifyShopUrl]" [queryParams]="{'name': m.name,'parentOrgId':m._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a><a href="javascript:;" class="fa fa-trash-o fa-lg"  (click)="deleteOrg($event, m._id)"></a></span>
+                      <!--<ul>
+                        <li *ngFor="let n of m.children">
+                          <span><i class=""></i> {{n.name}} <a routerLinkActive="active" [routerLink]="[modifyShopUrl]" [queryParams]="{'name': n.name,'parentOrgId':n._id,'companyId': companyId}" class="fa fa-edit fa-lg"></a> <a href="javascript:;" class="fa fa-trash-o fa-lg"  (click)="deleteOrg($event, n._id, n.children)"></a></span>
+                        </li>
+                      </ul>-->
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+</div>
+

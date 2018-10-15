@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-sm-2">
+    <button class="btn btn-primary" type="button" (click)="addCompany()">新增</button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">公司</th>
+        <!--<th class="text-center">层级</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of companyData">
+        <td>{{i.name}}</td>
+        <!--<td>{{i.level}}</td>-->
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div style="margin-left: 20px;">
+    <pagination [totalItems]="totalItems" (pageChanged)="pageChanged($event)" [itemsPerPage]="pageSize"
+                previousText="&laquo;" nextText="&raquo;"></pagination>
+  </div>
+</div>

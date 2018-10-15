@@ -1,0 +1,40 @@
+<h3>添加店铺</h3>
+<div class="row">
+  <p class="col-sm-2">父级组织：</p>
+  <p class="col-sm-2">{{parentName}}</p>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">店铺名称：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="form-control" [(ngModel)]="storeName">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">卖场品牌：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [ngModel]="storeBrand" (ngModelChange)="onStoreBrandChange($event)">
+      <option value=""></option>
+      <option *ngFor="let i of brandList; index as currentIndex" [value]="currentIndex">{{i.channelTypeName}}</option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <label class="query_label">卖场名称：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <select class="form-control" [ngModel]="brandName" (ngModelChange)="onBrandNameChange($event)">
+      <option value=""></option>
+      <option *ngFor="let i of brandNameList" [value]="i.channelId">{{i.channelName}}</option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
+    <button class="btn btn-primary" type="button" (click)="addShop()">确定</button>
+  </div>
+</div>

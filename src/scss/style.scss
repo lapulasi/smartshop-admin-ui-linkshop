@@ -1,0 +1,137 @@
+/**
+ * CoreUI - Open Source Bootstrap Admin Template
+ * @version v1.0.0-alpha.6
+ * @link http://coreui.io
+ * Copyright (c) 2017 creativeLabs Łukasz Holeczek
+ * @license MIT
+ */
+// Import normalize
+@import "bootstrap/normalize";
+
+// Override Boostrap variables
+@import "bootstrap-variables";
+
+// Import Bootstrap source files
+@import "bootstrap/bootstrap";
+
+// If you want you can import bootstrap scss files directly from node_modules or bower_components.
+// To do this please remove @import "bootstrap/bootstrap"; and uncomment proper line.
+
+// Import Bootstrap source files from node_modules
+// @import "node_modules/bootstrap/scss/bootstrap";
+
+// Import Bootstrap source files from bower_components
+// @import "bower_components/bootstrap/scss/bootstrap";
+
+// Import core styles
+@import "custom-variables";
+@import "core/mixins";
+
+// Import vendors styles
+@import "vendors/vendors";
+
+// Additional typography
+@import "core/typography";
+
+// Animations
+@import "core/animate";
+
+// Components
+@import "core/aside";
+@import "core/avatars";
+@import "core/badge";
+@import "core/breadcrumb-menu";
+@import "core/breadcrumb";
+@import "core/buttons";
+@import "core/callout";
+@import "core/card";
+@import "core/charts";
+@import "core/dropdown";
+@import "core/footer";
+@import "core/grid";
+@import "core/input-group";
+@import "core/loading";
+@import "core/modal";
+@import "core/nav";
+@import "core/navbar";
+@import "core/progress";
+@import "core/sidebar";
+@import "core/switches";
+@import "core/tables";
+@import "core/widgets";
+
+// Layout Options
+@import "core/layout";
+
+@import "core/others";
+
+// Utility classes
+@import "core/utilities";
+
+// Temporary fixes
+@import "core/temp";
+
+// Right-to-left
+@import "core/rtl";
+
+// Custom styles
+@import "custom";
+
+
+.pb-0, .py-0 {
+  padding-bottom: 0 !important;
+}
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.chartjs-tooltip {
+  position: absolute;
+  z-index: 1021;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 0.25rem 0.5rem;
+  color: #fff;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: all 0.25s ease;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  border-radius: 0.25rem;
+}
+
+.chartjs-tooltip .tooltip-header {
+  margin-bottom: 0.5rem;
+}
+
+.chartjs-tooltip .tooltip-header-item {
+  font-size: 0.765625rem;
+  font-weight: 700;
+}
+
+.chartjs-tooltip .tooltip-body-item {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 0.765625rem;
+  white-space: nowrap;
+}
+
+.chartjs-tooltip .tooltip-body-item-color {
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-right: 0.875rem;
+}
+
+.chartjs-tooltip .tooltip-body-item-value {
+  padding-left: 1rem;
+  margin-left: auto;
+  font-weight: 700;
+}

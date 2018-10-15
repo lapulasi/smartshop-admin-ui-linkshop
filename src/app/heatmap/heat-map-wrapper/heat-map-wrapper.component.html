@@ -1,0 +1,58 @@
+<div class="col-lg-12 border-dark">
+  <div class="container-fluid border border-primary">
+    <div class="">
+      <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-md-4"><label>店名</label></div>
+      <div class="col-md-8"><label>{{shopName}}</label></div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-4">
+        <label class="">日期：</label>
+      </div>
+      <div class="col-md-4">
+        <input class="form-control" name="startDate" placeholder="请选择开始时间" type="text"
+               [ngModel]="startDate | date: 'yyyy-MM-dd'" (focus)="showDate1=true;showDate2=false;">
+
+        <div *ngIf="showDate1" style="position:absolute;z-index: 99;top: 2.5em;">
+          <datepicker [(ngModel)]="startDate" (selectionDone)="showDate1=false;"></datepicker>
+        </div>
+
+
+      </div>
+      <div class="col-md-4">
+        <input class="form-control" name="startDate" placeholder="请选择结束时间" type="text"
+               [ngModel]="endDate | date: 'yyyy-MM-dd'" (focus)="showDate1=false;showDate2=true;">
+
+        <div *ngIf="showDate2" style="position:absolute;z-index: 99;top: 2.5em;">
+          <datepicker [(ngModel)]="endDate" (selectionDone)="showDate2=false;"></datepicker>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4" style="margin-top: 30px;">
+        <label class="">时间：</label>
+      </div>
+      <div class="col-md-4"><timepicker [(ngModel)]="startTime"></timepicker></div>
+      <!--<div style="line-height: 2.25;margin-top: 30px;">-&#45;&#45;</div>-->
+      <div class="col-md-4"><timepicker [(ngModel)]="endTime"></timepicker></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-1">
+        <button class="btn btn-primary" type="button" (click)="showHeatMap()" >确定</button>
+      </div>
+    </div>
+    <br>
+    <div class="" style="background-color: #f7f7f9;width: 640px;height: 480px">
+      <div #dynamicHeatMapContainer></div>
+    </div>
+
+
+  </div>
+
+</div>

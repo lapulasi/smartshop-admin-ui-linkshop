@@ -1,0 +1,44 @@
+<div class="row">
+
+  <div class="col-sm-1">
+    <label class="query_label">UID：</label>
+  </div>
+  <div class="form-group col-sm-2">
+    <input type="text" class="from-group" [(ngModel)]="deviceUID">
+  </div>
+
+  <div class="col-sm-2">
+    <button class="btn btn-primary" type="button" (click)="queryMsg()">搜索</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-block">
+    <table class="table table-responsive table-hover table-outline mb-0 text-center" style="table-layout: fixed">
+      <thead class="thead-default">
+      <tr>
+        <th class="text-center">time</th>
+        <th class="text-center">image</th>
+        <th class="text-center">result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let msg of msgs">
+        <td>{{msg.time | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td>
+          <a href="{{imgPrefix}}{{msg.imgName}}">
+            <img src="{{imgPrefix}}{{msg.imgName}}" class="img-avatar" width="40" height="40"/>
+          </a>
+        </td>
+        <td>{{msg.handleResult}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-left: 20px;">
+    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="9" (pageChanged)="pageChanged($event)"
+                [itemsPerPage]="pageRequest.size"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+  </div>
+</div>
+

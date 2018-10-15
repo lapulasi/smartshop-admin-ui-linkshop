@@ -1,0 +1,64 @@
+<div class="card">
+  <div class="card-header">
+    <strong>新增设备版本</strong>
+  </div>
+  <form class="form-horizontal" enctype="multipart/form-data" method="post"  (ngSubmit)="submitForm()" #versionForm="ngForm">
+  <div class="card-block">
+
+      <div class="form-group row">
+        <label class="col-md-3 form-control-label" >版本号</label>
+        <div class="col-md-9">
+          <input [(ngModel)]="vs.version" name="version" #version="ngModel" required class="form-control" placeholder="请输入版本号" type="text">
+          <span class="help-block tips-color" [hidden]="version.valid || version.pristine">请输入版本号</span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 form-control-label" >类型</label>
+        <div class="col-md-9">
+          <input [(ngModel)]="vs.type" name="type" #type="ngModel" required class="form-control" placeholder="请输入类型" type="text">
+          <span class="help-block tips-color" [hidden]="type.valid || type.pristine">请输入设备编号</span>
+        </div>
+      </div>
+    <div class="form-group row">
+      <label class="col-md-3 form-control-label">状态</label>
+      <div class="col-md-9">
+        <select [(ngModel)]="vs.status" name="status" #status="ngModel" class="form-control">
+          <option value="ENABLE">发布</option>
+          <option value="DISABLE">未发布</option>
+        </select>
+        <span class="help-block tips-color" [hidden]="status.valid || status.pristine">请选择状态</span>
+      </div>
+    </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 form-control-label">文件上传</label>
+        <div class="col-md-9">
+          <input type="hidden" [(ngModel)]="vs.path" name="path"/>
+          <input ng2FileSelect [uploader]="uploader" type="file" name="file" (change)="selectedFileOnChanged($event)">
+          <span class="help-block tips-color">{{message}}</span>
+        </div>
+      </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-sm btn-primary" type="submit" [disabled]="!versionForm.form.valid"><i class="fa fa-dot-circle-o"></i> 提交</button>
+    <button class="btn btn-sm btn-primary" (click)="toListPage()">返回</button>
+  </div>
+  </form>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">提示</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        新增成功！
+      </div>
+    </div>
+  </div>
+</div>
